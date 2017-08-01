@@ -9,8 +9,8 @@
 }
 请将上述内容写到 city.xls 文件中，如下图所示：
 """
-import xlwt,json,codecs
-from collections import OrderedDict
+import xlwt, json, codecs
+
 
 def main():
     with codecs.open('source/0015/city.txt', 'r', 'utf8') as f:
@@ -19,7 +19,7 @@ def main():
         city_sheet = workbook.add_sheet('city', cell_overwrite_ok=True)
         for index, (key, value) in enumerate(data.items()):
             city_sheet.write(index, 0, key)
-            city_sheet.write(index,1,value)
+            city_sheet.write(index, 1, value)
         workbook.save('source/0015/city.xls')
 
 
