@@ -6,7 +6,7 @@ from PIL import Image, ImageFont, ImageDraw
 
 def add_num(img):
     draw = ImageDraw.Draw(img)
-    myfont = ImageFont.truetype('source/0000/111.ttf', size=40)
+    myfont = ImageFont.truetype('source/0000/msyh.ttf', size=40)
     color = '#ff0000'
     width, height = img.size
     draw.text((width - 90, 5), u'地方', font=myfont, fill=color)
