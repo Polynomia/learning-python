@@ -22,11 +22,11 @@ def get_bs(word):
 
 def get_typoDef(bsObj):
     content = bsObj.find("div", {"class": "error-typo"})
-    if content == []:
+    if not content:
         return None
     new_word = content.find("a", {"class": "search-js"}).get_text()
     reDef = re.compile('</span>[\s]*\n*(.*?)[\s]*\n*</p>')
-    typo_def = reDef.findall(str(content))
+    typo_def = reDef.search(str(content)).group(1)
     return new_word, typo_def
 
 
@@ -50,15 +50,19 @@ def get_examples(bsObj):
 
 
 def get_soundmark(bsObj):
-    pass
+    phonetic = bsObj.find("div",{"class":"baav"})
+    sound = [pro.get_text() for pro in phonetic.find_all("span",{"class":"phonetic"})]
+    return sound
 
 
 if __name__ == '__main__':
-    word = 'dffd'
+    word = 'polynomial'
     bs = get_bs(word)
     if not get_typoDef(bs):
         definitions = get_definitions(bs)
         eng, ch = get_examples(bs)
         print(eng, ch)
+        get_soundmark(bs)
+        print(get_soundmark(bs))
     else:
         print(get_typoDef(bs))
